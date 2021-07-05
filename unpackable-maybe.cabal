@@ -4,14 +4,14 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 
-name:           maybe
+name:           unpackable-maybe
 version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/maybe#readme>
-homepage:       https://github.com/larthia/maybe#readme
-bug-reports:    https://github.com/larthia/maybe/issues
+homepage:       https://github.com/githubuser/maybe#readme
+bug-reports:    https://github.com/githubuser/maybe/issues
 author:         Nicola Bonelli
 maintainer:     nicola@larthia.com
-copyright:      2021 Nicola Bonelli
+copyright:      2021 Nicola Bonell
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
@@ -27,7 +27,7 @@ library
   exposed-modules:
       Data.Unpackable.Maybe
   other-modules:
-      Paths_maybe
+      Paths_unpackable_maybe
   hs-source-dirs:
       src
   build-depends:
@@ -36,27 +36,27 @@ library
     , serialise
   default-language: Haskell2010
 
-executable maybe-exe
+executable unpackable-maybe-exe
   main-is: Main.hs
   other-modules:
-      Paths_maybe
+      Paths_unpackable_maybe
   hs-source-dirs:
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
-    , maybe
+    , unpackable-maybe
   default-language: Haskell2010
 
-test-suite maybe-test
+test-suite unpackable-maybe-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      Paths_maybe
+      Paths_unpackable_maybe
   hs-source-dirs:
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
-    , maybe
+    , unpackable-maybe
   default-language: Haskell2010

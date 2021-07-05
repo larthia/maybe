@@ -1,4 +1,4 @@
-name:                maybe
+name:                unpackable-maybe
 version:             0.1.0.0
 github:              "githubuser/maybe"
 license:             BSD3
@@ -29,7 +29,7 @@ library:
     - serialise
 
 executables:
-  maybe-exe:
+  unpackable-maybe-exe:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -37,10 +37,10 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - maybe
+    - unpackable-maybe
 
 tests:
-  maybe-test:
+  unpackable-maybe-test:
     main:                Spec.hs
     source-dirs:         test
     ghc-options:
@@ -48,4 +48,4 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - maybe
+    - unpackable-maybe
