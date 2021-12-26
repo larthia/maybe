@@ -1,10 +1,10 @@
 name:                unpackable-maybe
-version:             0.1.0.1
+version:             0.1.0.3
 github:              "larthia/maybe"
 license:             BSD3
 author:              "Nicola Bonelli"
 maintainer:          "nicola@larthia.com"
-copyright:           "2021 Nicola Bonell"
+copyright:           "2021 Nicola Bonelli"
 
 extra-source-files:
 - README.md

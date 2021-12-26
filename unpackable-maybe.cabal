@@ -5,13 +5,13 @@ cabal-version: 1.12
 -- see: https://github.com/sol/hpack
 
 name:           unpackable-maybe
-version:        0.1.0.2
+version:        0.1.0.3
 description:    Please see the README on GitHub at <https://github.com/githubuser/maybe#readme>
 homepage:       https://github.com/larthia/maybe#readme
 bug-reports:    https://github.com/larthia/maybe/issues
 author:         Nicola Bonelli
 maintainer:     nicola@larthia.com
-copyright:      2021 Nicola Bonell
+copyright:      2021 Nicola Bonelli
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
