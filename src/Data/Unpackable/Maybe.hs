@@ -12,7 +12,8 @@ module Data.Unpackable.Maybe (
  ,  fromMaybe
  ,  fromJust
  ,  maybeToList
- ,  toUnpackableMaybe
+ ,  toUnpackMaybe
+ ,  fromUnpackMaybe
  ,  headMaybe
  ,  initMaybe
  ,  lastMaybe
@@ -36,6 +37,7 @@ pattern Nothing = Maybe (# (# #) | #)
 
 pattern Just :: a -> Maybe a
 pattern Just a  = Maybe (# | a #)
+
 
 isNothing :: Maybe a -> Bool
 isNothing m = case m of
@@ -91,10 +93,16 @@ instance Ord a => Ord (Maybe a) where
   compare _        _        = EQ
 
 
-toUnpackableMaybe :: P.Maybe a -> Maybe a
-toUnpackableMaybe (P.Just x) = Just x
-toUnpackableMaybe _          = Nothing
-{-# INLINE toUnpackableMaybe #-}
+toUnpackMaybe :: P.Maybe a -> Maybe a
+toUnpackMaybe (P.Just x) = Just x
+toUnpackMaybe _          = Nothing
+{-# INLINE toUnpackMaybe #-}
+
+fromUnpackMaybe :: Maybe a -> P.Maybe a
+fromUnpackMaybe (Just x) = P.Just x
+fromUnpackMaybe _        = P.Nothing
+{-# INLINE fromUnpackMaybe #-}
+
 
 instance A.ToJSON a => A.ToJSON (Maybe a) where
     toJSON (Just x) = A.toJSON x

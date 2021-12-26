@@ -9,7 +9,7 @@ import GHC.Exts
 import Foreign ( Storable(sizeOf) )
 
 data Test = Test {
-    x1 :: {-# UNPACK #-} !(Maybe Int)
+    x1 :: !(Maybe Int)
 }
 
 data TestUnpack = TestUnpack {
