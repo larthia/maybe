@@ -1,7 +1,9 @@
-{-# LANGUAGE UnboxedSums #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE UnboxedTuples #-}
-{-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# HLINT ignore "Use newtype instead of data" #-}
 
 module Data.Unpackable.Maybe (
     Maybe(..)
@@ -29,8 +31,10 @@ import GHC.Stack.Types ( HasCallStack )
 import qualified Data.Aeson as A
 import qualified Data.Aeson.Types as A
 import qualified Data.List as L
+import Data.Typeable ( Typeable )
 
 data Maybe a = Maybe (# (# #) | a #)
+              deriving (Typeable)
 
 pattern Nothing :: Maybe a
 pattern Nothing = Maybe (# (# #) | #)
@@ -122,12 +126,10 @@ parseJSON1 :: (A.FromJSON1 f, A.FromJSON a) => A.Value -> A.Parser (f a)
 parseJSON1 = A.liftParseJSON A.parseJSON A.parseJSONList
 {-# INLINE parseJSON1 #-}
 
-
 completeList :: Foldable t => (t a -> b) -> t a -> Maybe b
 completeList f xs
   | L.null xs = Nothing
   | otherwise = Just $ f xs
-
 
 headMaybe :: [a] -> Maybe a
 headMaybe = completeList L.head

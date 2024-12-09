@@ -1,5 +1,5 @@
 name:                unpackable-maybe
-version:             0.1.0.3
+version:             0.1.1.0
 github:              "larthia/maybe"
 license:             BSD3
 author:              "Nicola Bonelli"
@@ -27,17 +27,6 @@ library:
   dependencies:
     - aeson
     - serialise
-
-executables:
-  unpackable-maybe-exe:
-    main:                Main.hs
-    source-dirs:         app
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - unpackable-maybe
 
 tests:
   unpackable-maybe-test:
