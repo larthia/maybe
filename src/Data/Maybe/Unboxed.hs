@@ -5,7 +5,7 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Use newtype instead of data" #-}
 
-module Data.Unpackable.Maybe (
+module Data.Maybe.Unboxed (
     Maybe(..)
  ,  pattern Nothing
  ,  pattern Just
@@ -14,8 +14,8 @@ module Data.Unpackable.Maybe (
  ,  fromMaybe
  ,  fromJust
  ,  maybeToList
- ,  toUnpackMaybe
- ,  fromUnpackMaybe
+ ,  toMaybeUnboxed
+ ,  fromMaybeUnboxed
  ,  headMaybe
  ,  initMaybe
  ,  lastMaybe
@@ -63,7 +63,7 @@ fromMaybe d _ = d
 
 fromJust :: HasCallStack => Maybe a -> a
 fromJust (Just x) = x
-fromJust _ = error "Unpackable.Maybe.fromJust: Nothing"
+fromJust _ = error "Maybe.Unboxed.fromJust: Nothing"
 {-# INLINE fromJust #-}
 
 maybeToList :: Maybe a -> [a]
@@ -97,15 +97,15 @@ instance Ord a => Ord (Maybe a) where
   compare _        _        = EQ
 
 
-toUnpackMaybe :: P.Maybe a -> Maybe a
-toUnpackMaybe (P.Just x) = Just x
-toUnpackMaybe _          = Nothing
-{-# INLINE toUnpackMaybe #-}
+toMaybeUnboxed :: P.Maybe a -> Maybe a
+toMaybeUnboxed (P.Just x) = Just x
+toMaybeUnboxed _          = Nothing
+{-# INLINE toMaybeUnboxed #-}
 
-fromUnpackMaybe :: Maybe a -> P.Maybe a
-fromUnpackMaybe (Just x) = P.Just x
-fromUnpackMaybe _        = P.Nothing
-{-# INLINE fromUnpackMaybe #-}
+fromMaybeUnboxed :: Maybe a -> P.Maybe a
+fromMaybeUnboxed (Just x) = P.Just x
+fromMaybeUnboxed _        = P.Nothing
+{-# INLINE fromMaybeUnboxed #-}
 
 
 instance A.ToJSON a => A.ToJSON (Maybe a) where

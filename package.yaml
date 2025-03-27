@@ -1,5 +1,5 @@
-name:                unpackable-maybe
-version:             0.1.1.0
+name:                maybe-unboxed
+version:             0.2.0.0
 github:              "larthia/maybe"
 license:             BSD3
 author:              "Nicola Bonelli"
@@ -29,7 +29,7 @@ library:
     - serialise
 
 tests:
-  unpackable-maybe-test:
+  maybe-unboxed-test:
     main:                Spec.hs
     source-dirs:         test
     ghc-options:
@@ -37,4 +37,4 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - unpackable-maybe
+    - maybe-unboxed

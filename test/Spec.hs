@@ -1,17 +1,17 @@
 {-# LANGUAGE UnboxedTuples #-}
 {-# LANGUAGE MagicHash #-}
 
-import qualified Data.Unpackable.Maybe as Unpack
+import qualified Data.Maybe.Unboxed as U
 import GHC.Exts
     ( unsafeCoerce#, Int(I#), (+#), sizeofArray#, unpackClosure# )
 import Foreign ( Storable(sizeOf) )
 
 data Test = Test {
-    x1 :: !(Maybe Int)
+    x1 :: !(U.Maybe Int)
 }
 
-data TestUnpack = TestUnpack {
-    x2 :: {-# UNPACK #-} !(Unpack.Maybe Int)
+data TestUnboxed = TestUnboxed {
+    x2 :: {-# UNPACK #-} !(U.Maybe Int)
 }
 
 
@@ -26,7 +26,7 @@ unsafeSizeof a =
 
 main :: IO ()
 main = do
-    putStrLn $ "Test { Nothing }        -> " <> show (unsafeSizeof (Test Nothing))
-    putStrLn $ "Test { Just }           -> " <> show (unsafeSizeof (Test (Just 42)))
-    putStrLn $ "Test { Unpack.Nothing } -> " <> show (unsafeSizeof (TestUnpack Unpack.Nothing))
-    putStrLn $ "Test { Unpack.Just }    -> " <> show (unsafeSizeof (TestUnpack (Unpack.Just 42)))
+    putStrLn $ "Test        { U.Nothing } -> " <> show (unsafeSizeof (Test U.Nothing))
+    putStrLn $ "Test        { U.Just }    -> " <> show (unsafeSizeof (Test (U.Just 42)))
+    putStrLn $ "TestUnboxed { U.Nothing } -> " <> show (unsafeSizeof (TestUnboxed U.Nothing))
+    putStrLn $ "TestUnboxed { U.Just }    -> " <> show (unsafeSizeof (TestUnboxed (U.Just 42)))
