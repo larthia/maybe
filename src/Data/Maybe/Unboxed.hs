@@ -3,6 +3,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# OPTIONS_GHC -Wno-x-partial #-}
 {-# HLINT ignore "Use newtype instead of data" #-}
 
 module Data.Maybe.Unboxed (
@@ -114,8 +115,8 @@ instance A.ToJSON a => A.ToJSON (Maybe a) where
     {-# INLINE toJSON #-}
 
 instance A.FromJSON1 Maybe where
-    liftParseJSON _ _ A.Null = pure Nothing
-    liftParseJSON p _ a      = Just <$> p a
+    liftParseJSON _ _ _ A.Null = pure Nothing
+    liftParseJSON _ p _ a      = Just <$> p a
     {-# INLINE liftParseJSON #-}
 
 instance (A.FromJSON a) => A.FromJSON (Maybe a) where
@@ -123,26 +124,27 @@ instance (A.FromJSON a) => A.FromJSON (Maybe a) where
     {-# INLINE parseJSON #-}
 
 parseJSON1 :: (A.FromJSON1 f, A.FromJSON a) => A.Value -> A.Parser (f a)
-parseJSON1 = A.liftParseJSON A.parseJSON A.parseJSONList
+parseJSON1 = A.liftParseJSON A.omittedField A.parseJSON A.parseJSONList
 {-# INLINE parseJSON1 #-}
 
-completeList :: Foldable t => (t a -> b) -> t a -> Maybe b
-completeList f xs
+totalList :: Foldable t => (t a -> b) -> t a -> Maybe b
+totalList f xs
   | L.null xs = Nothing
   | otherwise = Just $ f xs
+{-# INLINABLE  totalList #-}
 
 headMaybe :: [a] -> Maybe a
-headMaybe = completeList L.head
+headMaybe = totalList L.head
 {-# INLINE headMaybe #-}
 
 lastMaybe :: [a] -> Maybe a
-lastMaybe = completeList L.last
+lastMaybe = totalList L.last
 {-# INLINE lastMaybe #-}
 
 initMaybe :: [a] -> Maybe [a]
-initMaybe = completeList L.init
+initMaybe = totalList L.init
 {-# INLINE initMaybe #-}
 
 tailMaybe :: [a] -> Maybe [a]
-tailMaybe = completeList L.tail
+tailMaybe = totalList L.tail
 {-# INLINE tailMaybe #-}
